@@ -10,6 +10,7 @@ Thumbs.db
 thumbs.db
 Desktop.ini
 *.orig
+dwsync.xml
 .sass-cache/
  
  
@@ -21,6 +22,12 @@ Desktop.ini
 .hg
 .hgignore
  
+#
+# NuGet Packages Directory
+#
+
+packages
+
  
 #
 # Visual Studio
