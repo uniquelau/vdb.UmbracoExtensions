@@ -30,7 +30,7 @@ namespace vdb.UmbracoExtensions.Xslt
 						DirectoryInfo indexDirectory = GetIndexPath(searchIndex);
 						directory = FSDirectory.Open(indexDirectory);
 						reader = IndexReader.Open(directory, true);
-						searcher = new IndexSearcher(reader);
+						searcher = new IndexSearcher(reader);	
 						searchFields = GetSearchFields(reader);
 				}
 
@@ -41,7 +41,6 @@ namespace vdb.UmbracoExtensions.Xslt
 						 
 						var parser = new MultiFieldQueryParser(LuceneVersion, searchFields, new StandardAnalyzer(LuceneVersion));
 						Query query = parser.Parse(luceneQuery);
-						Query testQ = parser.Parse("test:hello");
 						TopDocs topDocs = searcher.Search(query, maxResults);
 
 						foreach (ScoreDoc scoreDoc in topDocs.ScoreDocs)
@@ -53,8 +52,7 @@ namespace vdb.UmbracoExtensions.Xslt
 
 						if(!String.IsNullOrEmpty(highlightOpenTag) && !String.IsNullOrEmpty(highlightCloseTag) && fieldsToHighlight.Length > 0)
 						{
-								var scorer = new QueryScorer(testQ);
-								// var scorer = new QueryScorer(query);
+								var scorer = new QueryScorer(query);
 								var formatter = new SimpleHTMLFormatter(highlightOpenTag, highlightCloseTag);
 								var highlighter = new Highlighter(formatter, scorer);
 								highlighter.SetTextFragmenter(new SimpleFragmenter());
