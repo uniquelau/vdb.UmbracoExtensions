@@ -88,6 +88,10 @@
     <Content Include="bin\x86\sqlceme40.dll" />
     <Content Include="bin\x86\sqlceqp40.dll" />
     <Content Include="bin\x86\sqlcese40.dll" />
+    <Content Include="LuceneSearcher\Xslt\Helpers\_Pagination.xslt" />
+    <Content Include="LuceneSearcher\Xslt\luceneSearchQuery.xslt" />
+    <Content Include="LuceneSearcher\Xslt\luceneSearchResults.xslt" />
+    <Content Include="LuceneSearcher\Xslt\luceneSearchTemplate.xslt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
