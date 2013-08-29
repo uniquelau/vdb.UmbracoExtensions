@@ -8,17 +8,18 @@ using Examine.LuceneEngine.Providers;
 using Lucene.Net.Analysis;
 using Lucene.Net.Analysis.Standard;
 using Lucene.Net.Documents;
-using Lucene.Net.Search.Highlight;
+using Lucene.Net.Highlight;
 using Lucene.Net.Index;
 using Lucene.Net.QueryParsers;
 using Lucene.Net.Search;
 using Lucene.Net.Store;
 
+
 namespace vdb.UmbracoExtensions.Xslt
 {
 		public class LuceneSearcher : IDisposable
 		{
-				private static readonly Lucene.Net.Util.Version LuceneVersion = Lucene.Net.Util.Version.LUCENE_30;
+				private static readonly Lucene.Net.Util.Version LuceneVersion = Lucene.Net.Util.Version.LUCENE_29;
 				readonly FSDirectory directory;
 				readonly IndexReader reader;
 				readonly IndexSearcher searcher;
@@ -40,24 +41,23 @@ namespace vdb.UmbracoExtensions.Xslt
 						 
 						var parser = new MultiFieldQueryParser(LuceneVersion, searchFields, new StandardAnalyzer(LuceneVersion));
 						Query query = parser.Parse(luceneQuery);
+						Query testQ = parser.Parse("test:hello");
 						TopDocs topDocs = searcher.Search(query, maxResults);
 
 						foreach (ScoreDoc scoreDoc in topDocs.ScoreDocs)
 						{
-								Document document = reader.Document(scoreDoc.Doc);
-								var result = new SearchResult(document, scoreDoc.Score);
+								Document document = reader.Document(scoreDoc.doc);
+								var result = new SearchResult(document, scoreDoc.score);
 								results.Add(result);
 						}
 
 						if(!String.IsNullOrEmpty(highlightOpenTag) && !String.IsNullOrEmpty(highlightCloseTag) && fieldsToHighlight.Length > 0)
 						{
-								var scorer = new QueryScorer(query);
+								var scorer = new QueryScorer(testQ);
+								// var scorer = new QueryScorer(query);
 								var formatter = new SimpleHTMLFormatter(highlightOpenTag, highlightCloseTag);
 								var highlighter = new Highlighter(formatter, scorer);
-
-								new Lucene.Net.Search.Highlight.SimpleFragmenter();
-
-								// highlighter.SetTextFragmenter(new SimpleFragmenter());
+								highlighter.SetTextFragmenter(new SimpleFragmenter());
 								foreach (SearchResult result in results)
 								{
 										foreach (string highlightField in fieldsToHighlight)

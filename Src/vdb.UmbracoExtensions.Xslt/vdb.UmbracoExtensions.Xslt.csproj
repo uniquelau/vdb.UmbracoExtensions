@@ -37,11 +37,12 @@
     <Reference Include="Examine, Version=0.1.42.2941, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="Lucene.Net">
-      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
+    <Reference Include="Lucene.Net, Version=2.9.4.1, Culture=neutral, PublicKeyToken=85089178b9ac3181, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\UmbracoCms.Core.4.11.1\lib\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Lucene.Net.Contrib.Highlighter">
-      <HintPath>..\packages\Lucene.Net.Contrib.3.0.3\lib\net40\Lucene.Net.Contrib.Highlighter.dll</HintPath>
+    <Reference Include="Lucene.Net.Highlight">
+      <HintPath>..\packages\_NonNuGet\Lucene.Net.Highlight.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

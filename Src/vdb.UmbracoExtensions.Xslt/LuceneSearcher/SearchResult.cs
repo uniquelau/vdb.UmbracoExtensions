@@ -26,7 +26,7 @@ namespace vdb.UmbracoExtensions.Xslt
             //ignore our internal fields though
             foreach (Field field in fields.Cast<Field>())
             {
-                string fieldName = field.Name;
+                string fieldName = field.Name();
                 Fields.Add(fieldName, doc.Get(fieldName));
                 //Examine returns some fields as e.g. __FieldName rather than fieldName
                 if (fieldName.StartsWith(LuceneIndexer.SpecialFieldPrefix))
