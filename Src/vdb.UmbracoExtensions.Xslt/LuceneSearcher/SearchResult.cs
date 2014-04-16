@@ -33,7 +33,10 @@ namespace vdb.UmbracoExtensions.Xslt
                 {
                     int offset = LuceneIndexer.SpecialFieldPrefix.Length;
                     string tidiedFieldName = Char.ToLower(fieldName[offset]) + fieldName.Substring(offset + 1);
-                    Fields.Add(tidiedFieldName, doc.Get(fieldName));
+                    if (!Fields.ContainsKey(tidiedFieldName))
+                    {
+                        Fields.Add(tidiedFieldName, doc.Get(fieldName));
+                    }
                 }
             }
         }
